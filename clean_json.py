@@ -1,16 +1,18 @@
 import json
 import re
 
-# The path to your JSON file
-input_file_path = 'travis/travis_all_dirty.json'
-output_file_path = 'travis/travis_all_clean_fr.json'
+# JSON Path
+input_file_path = 'weeknd/weeknd_all_dirty.json'
+output_file_path = 'weeknd/weeknd_all_clean_fr.json'
 
 # The unwanted string to be removed
-unwanted_string = "\nSee Drake LiveGet tickets as low as $"
-
+unwanted_string = "\nYou might also like"
 # Pattern to match encoding information at the end of lyrics
 # Assumes the encoding information always starts with a digit followed by "Embed"
+# encoding_pattern = re.compile(r'\d+You might also like$')
+# encoding_pattern = re.compile(r'(\w+)\[151You might also like\]')
 encoding_pattern = re.compile(r'\d+Embed$')
+
 
 def cleanse_lyrics(input_path, output_path, unwanted_str, encoding_re):
     # Read the JSON data from the file
@@ -30,7 +32,12 @@ def cleanse_lyrics(input_path, output_path, unwanted_str, encoding_re):
     with open(output_path, 'w', encoding='utf-8') as file:
         json.dump(songs, file, ensure_ascii=False, indent=4)
 
-# Call the function with the path to your JSON file
+# Call the function with the path to JSON file
 cleanse_lyrics(input_file_path, output_file_path, unwanted_string, encoding_pattern)
 
 print("Lyrics cleansing complete. The cleaned data is saved to:", output_file_path)
+
+
+#phrases:
+# 1. 151you might also like
+# 2. live for as low

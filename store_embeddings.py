@@ -81,7 +81,7 @@ def load_and_store_embeddings(artist, test_mode, test_limit):
         if test_mode and pairs_processed >= test_limit:
             break #breaking so we don't do whole discovgraphy during testing
     # Batch upsert
-    batch_size = 100  # Adjust based on your needs
+    batch_size = 100  
     async_results = []
 
     for chunk in chunks(embeddings, batch_size):

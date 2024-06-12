@@ -60,7 +60,7 @@ def search_lyrics(query, artist):
         print(f"{i}. Score: {match['score']:.2f}, Title: {match['metadata']['title']}, Album: {match['metadata']['album']}, Lyrics: {formatted_lyrics}")
 
 if __name__ == "__main__":
-    query = "are you dumb"
+    query = "I think you are attractive and want to take you out on a date"
     artist = "kanye"
     search_lyrics(query, artist)
 
