@@ -1,6 +1,8 @@
 # Lyrix 🚀
 
 This is an IOS extension I have been building on the side that helps people communicate their feelings through an artist's lyrics. 
+
+Link to IOS frontend: https://github.com/mikesteroonie/lyrix-imessage-app
 ## 🛠️ Tools Used
 
 - [Swift]: Native IOS development for iMessage Extensions
