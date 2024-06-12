@@ -26,10 +26,10 @@ index = pc.Index(index_name)  # Use the Pinecone instance to access the Index
 
 # NOTE: limits to 2 vectors per song--would work if sanitized still returning 10
 
-def search_lyrics(query):
+def search_lyrics(query, artist):
     # Create the query embedding, specifying it's a search query
     query_embedding = co.embed(texts=[query], model="embed-english-v3.0", input_type='search_query').embeddings[0]
-    results = index.query(vector=query_embedding, top_k=20, include_metadata=True)
+    results = index.query(vector=query_embedding, top_k=100, include_metadata=True)
 
     # Initialize a dictionary to track the number of times vectors from each song are added
     song_count = {}
@@ -38,6 +38,9 @@ def search_lyrics(query):
     filtered_results = []
 
     for match in results['matches']:
+        # check to see if right artist
+        if artist and match['metadata'].get('artist') != artist:
+            continue
         # Use title and album as a composite key to uniquely identify a song
         song_key = (match['metadata']['title'], match['metadata']['album'])
         
@@ -57,8 +60,9 @@ def search_lyrics(query):
         print(f"{i}. Score: {match['score']:.2f}, Title: {match['metadata']['title']}, Album: {match['metadata']['album']}, Lyrics: {formatted_lyrics}")
 
 if __name__ == "__main__":
-    query = "You probably want to kill me"
-    search_lyrics(query)
+    query = "are you dumb"
+    artist = "kanye"
+    search_lyrics(query, artist)
 
 
 
